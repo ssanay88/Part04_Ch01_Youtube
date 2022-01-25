@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_player_scene">
 
+    <!--  영상을 띄어주는 공간  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainContainerLayout"
         android:layout_width="0dp"
@@ -15,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--  영상을 보여줄 공간 -> ExoPlayer  -->
     <ImageView
         android:id="@+id/playerView"
         android:layout_width="0dp"
@@ -24,6 +26,7 @@
         app:layout_constraintStart_toStartOf="@id/mainContainerLayout"
         app:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
 
+    <!--  영상을 내렸을 때 재생버튼  -->
     <ImageView
         android:id="@+id/bottomPlayerControlBtn"
         android:layout_width="wrap_content"
@@ -34,6 +37,7 @@
         app:layout_constraintEnd_toEndOf="@id/mainContainerLayout"
         app:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
 
+    <!--  영상을 내렸을 때 제목을 보여줄 텍스트뷰  -->
     <TextView
         android:id="@+id/bottomTitleTextView"
         android:layout_width="0dp"
@@ -48,6 +52,7 @@
         app:layout_constraintStart_toEndOf="@id/playerView"
         app:layout_constraintTop_toTopOf="@id/bottomPlayerControlBtn" />
 
+    <!--  영상들을 보여줄 리사이클러뷰  -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmentRecyclerView"
         android:layout_width="0dp"
@@ -64,6 +69,9 @@
 
     MotionLayout는 화면에 열려있을 때를 기준으로 ConstraintLayout과 화면이 내려가 있을 때 ConstraintLayout을 기준으로
     Layout을 움직일 때 값들의 변화를 설정한다.
+
+    여기서는 end화면 즉 화면을 올려서 크게 볼때 레이아웃, 내려서 작은 화면으로 만드는 경우 MotionLayout을 통해
+    만들어준다.
 
     -->
 

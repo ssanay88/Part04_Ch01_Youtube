@@ -19,6 +19,7 @@
             motion:layout_constraintStart_toStartOf="parent" />
     </ConstraintSet>
 
+    <!--  영상을 크게 보고 있는 경우 네비게이션바의 Y축을 움직여 사라지게 한다.  -->
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
@@ -29,6 +30,7 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
+        <!-- translationY : Y축으로 해당 크기만큼 움직인다. -->
 
     </ConstraintSet>
 </MotionScene>

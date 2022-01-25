@@ -36,3 +36,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
+
+<!--
+
+ConstraintLayout으로 우선 작성 후 MotionLayout으로 변경
+MainLayout의 경우 제일 아래 영상들의 목록인 리사이클러뷰가 있고, 아래에는 바텀네비게이션
+제일 위의 레이아웃에 FrameLayout을 통해 현재 보고있는 영상을 조작하도록 해준다. : fragment_player.xml 파일
+
+-->

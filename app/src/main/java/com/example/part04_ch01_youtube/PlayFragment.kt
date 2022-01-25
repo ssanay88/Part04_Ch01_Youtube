@@ -10,13 +10,13 @@ import kotlin.math.abs
 
 class PlayFragment : Fragment(R.layout.fragment_player) {
 
-    private var binding: FragmentPlayerBinding? = null
+    private var binding: FragmentPlayerBinding? = null    // 뷰바인딩 설정
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fragmentPlayerBinding = FragmentPlayerBinding.bind(view)
+        val fragmentPlayerBinding = FragmentPlayerBinding.bind(view)    // 프래그먼트에서 뷰를 바인딩하기
         binding = fragmentPlayerBinding
 
         fragmentPlayerBinding.playerMotionLayout.setTransitionListener(object :
@@ -67,7 +67,6 @@ class PlayFragment : Fragment(R.layout.fragment_player) {
 
     override fun onDestroy() {
         super.onDestroy()
-
         binding = null    // 뷰가 파괴될때 뷰바인딩 해제
 
     }

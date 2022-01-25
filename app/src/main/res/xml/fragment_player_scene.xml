@@ -13,8 +13,10 @@
     </Transition>
 
     <!--  레이아웃이 밑으로 내려져있을 경우  -->
+    <!--  제약이 연결된 큰 레이아웃들을 설정해주면 안에 있는 이미지뷰나 텍스트는 제약에 따라 이동  -->
     <ConstraintSet android:id="@+id/start">
 
+        <!-- 다른 영상들을 보여줄 리사이클러뷰는 높이를 0.1로 만들어서 안보이도록 해준다. Vertical_bias를 통해 제일 밑으로 붙여준다. -->
         <Constraint
             android:id="@+id/fragmentRecyclerView"
             android:layout_width="0dp"
@@ -35,7 +37,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintVertical_bias="1.0" />
+            motion:layout_constraintVertical_bias="1.0" />    <!-- 수직 기준 - 0 : 제일 위 , 1 : 제일 아래 -->
 
         <Constraint
             android:id="@+id/playerView"
@@ -49,6 +51,7 @@
 
     </ConstraintSet>
 
+    <!--  화면을 올려서 영상을 크게 보는 레이아웃  -->
     <ConstraintSet android:id="@+id/end">
 
         <Constraint

@@ -2,20 +2,85 @@ package com.example.part04_ch01_youtube
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.part04_ch01_youtube.adapter.VideoAdapter
+import com.example.part04_ch01_youtube.dto.VideoDto
+import com.example.part04_ch01_youtube.service.VideoService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
 
+    private lateinit var videoAdapter: VideoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // fragmentContainer에 프래그먼트를 교체한다.
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, PlayFragment())
             .commit()
 
+        videoAdapter = VideoAdapter()
+
+        // mainRecyclerView에 어댑터와 레이아웃 매니져 연결
+        findViewById<RecyclerView>(R.id.mainRecyclerView).apply {
+            adapter = videoAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        // api를 통해 비디오 목록을 가져오는 메서드
+        getVideoList()
+
     }
+
+
+    private fun getVideoList() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://run.mocky.io/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        retrofit.create(VideoService::class.java).also {
+            it.listVideos()
+                .enqueue(object : Callback<VideoDto> {
+                    override fun onResponse(call: Call<VideoDto>, response: Response<VideoDto>) {
+                        if (response.isSuccessful.not()) {
+                            Log.d("MainActivity","response Fail")
+                            return
+                        }
+
+                        response.body()?.let {
+                            Log.d("MainActivity", it.toString())
+                            videoAdapter.submitList(it.videos)
+                        }
+
+
+
+
+                    }
+
+                    override fun onFailure(call: Call<VideoDto>, t: Throwable) {
+                        // 예외처리
+                    }
+
+                })
+
+        }
+
+
+
+    }
+
+
+
 }
 
 

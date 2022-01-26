@@ -14,7 +14,7 @@ import com.example.part04_ch01_youtube.R
 import com.example.part04_ch01_youtube.model.VideoModel
 
 // start의 화면과 end의 화면에 있는 영상 리스트들은 같은 UI를 띄우기로 한다.
-class VideoAdapter: ListAdapter<VideoModel, VideoAdapter.ViewHolder>(diffUtil) {
+class VideoAdapter(val callback: (String, String) -> Unit): ListAdapter<VideoModel, VideoAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 
@@ -29,6 +29,10 @@ class VideoAdapter: ListAdapter<VideoModel, VideoAdapter.ViewHolder>(diffUtil) {
             Glide.with(thumbnailImageView.context)
                 .load(item.thumb)
                 .into(thumbnailImageView)
+
+            view.setOnClickListener {
+                callback(item.sources, item.title)
+            }
 
         }
 

@@ -28,7 +28,13 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, PlayFragment())
             .commit()
 
-        videoAdapter = VideoAdapter()
+        videoAdapter = VideoAdapter(callback = { url, title ->
+            // 현재 액티비티에 연결된 모든 프래그먼트들을 가져온 뒤, PlayFragment일 경우 let 실행
+            supportFragmentManager.fragments.find { it is PlayFragment }?.let {
+                (it as PlayFragment).playWithUrl(url, title)    // PlayFragment에 있는 PlayWithUrl 함수를 실행할 수 있도록 해준다.
+            }
+
+        })
 
         // mainRecyclerView에 어댑터와 레이아웃 매니져 연결
         findViewById<RecyclerView>(R.id.mainRecyclerView).apply {
@@ -75,8 +81,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
     }
 
 
@@ -103,5 +107,15 @@ Youtube
 - Retrofit을 이용하여 영상 목록을 받아와 구성함
 - MotionLayout을 이용하여 유투브 영상 플레이어 화면전환 애니메이션을 구현함
 - 영상 목록을 클릭하여 ExoPlayer를 이용하여 영상을 재생할 수 있음
+
+ */
+
+/*
+공부할 것
+TouchEvent
+MotionLayout
+CustomMotionLayout
+GestureDetector
+ExoPlayer
 
  */

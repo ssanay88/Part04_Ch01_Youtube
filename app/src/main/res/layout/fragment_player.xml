@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!-- VideoMotionLayout이라는 MotionLayout을 상속하는 클래스로 대체 -->
+<com.example.part04_ch01_youtube.VideoMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/playerMotionLayout"
     android:layout_width="match_parent"
@@ -11,17 +11,17 @@
         android:id="@+id/mainContainerLayout"
         android:layout_width="0dp"
         android:layout_height="250dp"
-        android:background="@color/purple_500"
+        android:background="#AAAAAA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--  영상을 보여줄 공간 -> ExoPlayer  -->
-    <ImageView
+    <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/playerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#0000FF"
+        app:resize_mode="fill"
         app:layout_constraintBottom_toBottomOf="@id/mainContainerLayout"
         app:layout_constraintStart_toStartOf="@id/mainContainerLayout"
         app:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
@@ -38,6 +38,8 @@
         app:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
 
     <!--  영상을 내렸을 때 제목을 보여줄 텍스트뷰  -->
+
+    <!--  영상들을 보여줄 리사이클러뷰  -->
     <TextView
         android:id="@+id/bottomTitleTextView"
         android:layout_width="0dp"
@@ -46,24 +48,27 @@
         android:layout_marginEnd="12dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textColor="@color/black"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/bottomPlayerControlBtn"
         app:layout_constraintEnd_toStartOf="@id/bottomPlayerControlBtn"
         app:layout_constraintStart_toEndOf="@id/playerView"
         app:layout_constraintTop_toTopOf="@id/bottomPlayerControlBtn" />
 
-    <!--  영상들을 보여줄 리사이클러뷰  -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmentRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
+        android:nestedScrollingEnabled="false"
+        android:padding="16dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainContainerLayout" />
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</com.example.part04_ch01_youtube.VideoMotionLayout>
 
     <!--
 
@@ -72,6 +77,8 @@
 
     여기서는 end화면 즉 화면을 올려서 크게 볼때 레이아웃, 내려서 작은 화면으로 만드는 경우 MotionLayout을 통해
     만들어준다.
+
+    RecyclerView - nestedScrollingEnabled?
 
     -->
 
